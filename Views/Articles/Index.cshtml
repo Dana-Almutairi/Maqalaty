@@ -1,0 +1,350 @@
+@model IEnumerable<Maqalaty.Models.Article>
+
+@{
+    ViewData["Title"] = "Explore Articles";
+
+    var articles = Model.ToList();
+
+    var searchTerm = ViewData["SearchTerm"] as string;
+
+    var isSearching = !string.IsNullOrWhiteSpace(searchTerm);
+}
+
+<div class="container py-5">
+
+    <!-- Hero Section -->
+    <section class="text-center py-5 mb-5">
+
+        <span class="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
+            Welcome to Maqalaty
+        </span>
+
+        <h1 class="display-3 fw-bold mb-3">
+            Stories Worth Reading.
+        </h1>
+
+        <p class="lead text-muted mx-auto"
+           style="max-width: 650px;">
+            Explore inspiring ideas, thoughtful stories,
+            and knowledge shared through Maqalaty.
+        </p>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="Articles"
+               asp-action="Create"
+               class="btn btn-primary mt-4 px-4 py-3">
+                + Create New Article
+            </a>
+        }
+
+    </section>
+
+    <!-- Search Section -->
+    <section class="mb-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="card border-0 shadow-sm rounded-4">
+
+                    <div class="card-body p-4">
+
+                        <h2 class="h5 fw-bold mb-3">
+                            Search Articles
+                        </h2>
+
+                        <form asp-controller="Articles"
+      asp-action="Index"
+      method="get">
+
+    <div class="row g-3">
+
+        <!-- Search -->
+        <div class="col-md-7">
+
+            <label for="searchTerm"
+                   class="form-label fw-semibold">
+                Search by Title
+            </label>
+
+            <input type="search"
+                   id="searchTerm"
+                   name="searchTerm"
+                   value="@searchTerm"
+                   class="form-control form-control-lg"
+                   placeholder="Search articles..."
+                   maxlength="200" />
+
+        </div>
+
+        <!-- Category Filter -->
+        <div class="col-md-5">
+
+            <label for="categoryId"
+                   class="form-label fw-semibold">
+                Category
+            </label>
+
+            <select id="categoryId"
+                    name="categoryId"
+                    asp-items="ViewBag.Categories"
+                    class="form-select form-select-lg">
+
+                <option value="">All Categories</option>
+
+            </select>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="col-12">
+
+            <div class="d-flex flex-wrap gap-2">
+
+                <button type="submit"
+                        class="btn btn-primary px-4">
+                    Search & Filter
+                </button>
+
+                <a asp-controller="Articles"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary px-4">
+                    Clear Filters
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+
+                        @if (isSearching)
+                        {
+                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-3">
+
+                                <p class="text-muted small mb-0">
+                                    Showing results for:
+                                    <strong>@searchTerm</strong>
+                                </p>
+
+                                <a asp-controller="Articles"
+                                   asp-action="Index"
+                                   class="btn btn-outline-secondary btn-sm">
+                                    Clear Search
+                                </a>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Articles Header -->
+    <section class="mb-4">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+            <div>
+
+                <h2 class="fw-bold mb-1">
+                    @(isSearching ? "Search Results" : "Latest Articles")
+                </h2>
+
+                <p class="text-muted mb-0">
+
+                    @if (isSearching)
+                    {
+                        <span>
+                            Articles matching your search.
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            Discover our latest published stories.
+                        </span>
+                    }
+
+                </p>
+
+            </div>
+
+            <span class="badge bg-light text-dark border px-3 py-2">
+
+                @if (isSearching)
+                {
+                    <span>@articles.Count Results Found</span>
+                }
+                else
+                {
+                    <span>@articles.Count Published Articles</span>
+                }
+
+            </span>
+
+        </div>
+
+    </section>
+
+    <!-- Articles Grid -->
+    <section>
+
+        @if (!articles.Any())
+        {
+            <div class="card border-0 shadow-sm text-center py-5">
+
+                <div class="card-body py-5">
+
+                    <div class="display-4 mb-3">
+                        📖
+                    </div>
+
+                    @if (isSearching)
+                    {
+                        <h3 class="fw-bold">
+                            No Articles Found
+                        </h3>
+
+                        <p class="text-muted">
+                            We couldn't find any published articles
+                            matching your search.
+                        </p>
+
+                        <a asp-controller="Articles"
+                           asp-action="Index"
+                           class="btn btn-primary mt-3">
+                            View All Articles
+                        </a>
+                    }
+                    else
+                    {
+                        <h3 class="fw-bold">
+                            No Articles Yet
+                        </h3>
+
+                        <p class="text-muted">
+                            New stories and ideas are coming soon.
+                        </p>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="Articles"
+                               asp-action="Create"
+                               class="btn btn-primary mt-3">
+                                Publish Your First Article
+                            </a>
+                        }
+                    }
+
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+
+                @foreach (var article in articles)
+                {
+                    var preview = article.Content.Length > 160
+                        ? article.Content.Substring(0, 160) + "..."
+                        : article.Content;
+
+                    var categoryName = article.Category?.Name
+                        ?? "Uncategorized";
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <article class="card h-100 shadow-sm">
+
+                            <div class="card-body p-4 d-flex flex-column">
+
+                                <!-- Category Badge -->
+                                <div class="mb-3">
+
+                                    <span class="badge bg-primary-subtle text-primary px-3 py-2">
+                                        @categoryName
+                                    </span>
+
+                                </div>
+
+                                <!-- Article Title -->
+                                <h3 class="card-title h4 fw-bold mb-3">
+                                    @article.Title
+                                </h3>
+
+                                <!-- Article Information -->
+                                <div class="d-flex flex-wrap gap-3 text-muted small mb-3">
+
+                                    <span>
+                                        By @article.Author
+                                    </span>
+
+                                    <span>
+                                        @article.CreatedAt.ToString("MMM dd, yyyy")
+                                    </span>
+
+                                </div>
+
+                                <!-- Article Preview -->
+                                <p class="card-text text-muted mb-4">
+                                    @preview
+                                </p>
+
+                                <!-- Action Buttons -->
+                                <div class="mt-auto">
+
+                                    <a asp-controller="Articles"
+                                       asp-action="Details"
+                                       asp-route-id="@article.Id"
+                                       class="btn btn-primary w-100 mb-2">
+                                        Read Article →
+                                    </a>
+
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <div class="d-flex gap-2">
+
+                                            <a asp-controller="Articles"
+                                               asp-action="Edit"
+                                               asp-route-id="@article.Id"
+                                               class="btn btn-outline-secondary btn-sm flex-fill">
+                                                Edit
+                                            </a>
+
+                                            <a asp-controller="Articles"
+                                               asp-action="Delete"
+                                               asp-route-id="@article.Id"
+                                               class="btn btn-outline-danger btn-sm flex-fill">
+                                                Delete
+                                            </a>
+
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+                }
+
+            </div>
+        }
+
+    </section>
+
+</div>

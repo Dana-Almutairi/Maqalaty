@@ -1,0 +1,91 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container py-5">
+
+    <div class="mb-5">
+        <h1 class="fw-bold">Admin Dashboard</h1>
+        <p class="text-muted">
+            Manage your articles and categories.
+        </p>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <h6 class="text-muted">Total Articles</h6>
+                    <h2 class="fw-bold mb-0">
+                        @ViewBag.TotalArticles
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <h6 class="text-muted">Published Articles</h6>
+                    <h2 class="fw-bold text-success mb-0">
+                        @ViewBag.PublishedArticles
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <h6 class="text-muted">Draft Articles</h6>
+                    <h2 class="fw-bold text-warning mb-0">
+                        @ViewBag.DraftArticles
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Management -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+            <h4 class="fw-bold mb-3">
+                Content Management
+            </h4>
+
+            <p class="text-muted">
+                Create, edit, publish, and manage your content.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <a asp-controller="Articles"
+                   asp-action="Create"
+                   class="btn btn-primary">
+                    Create Article
+                </a>
+
+                <a asp-controller="Admin"
+                   asp-action="Articles"
+                   class="btn btn-outline-dark">
+                    Manage Articles
+                </a>
+
+                <a asp-controller="Admin"
+                   asp-action="Categories"
+                   class="btn btn-outline-secondary">
+                    Manage Categories
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

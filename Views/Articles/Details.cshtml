@@ -1,0 +1,94 @@
+
+@model Maqalaty.Models.Article
+
+@{
+    ViewData["Title"] = Model.Title;
+    var categoryName = Model.Category?.Name ?? "Uncategorized";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+
+            <div class="mb-4">
+                <a asp-controller="Articles"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    ← Back to Articles
+                </a>
+            </div>
+
+            <article class="card border-0 shadow-sm overflow-hidden">
+                <div class="card-body p-4 p-md-5">
+
+                    <header class="mb-5">
+
+                        <span class="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
+                            Maqalaty Article
+                        </span>
+
+                        <div class="mb-3">
+                            <span class="badge bg-light text-dark border px-3 py-2">
+                                @categoryName
+                            </span>
+                        </div>
+
+                        <h1 class="display-5 fw-bold mb-4">
+                            @Model.Title
+                        </h1>
+
+                        <div class="d-flex flex-wrap align-items-center gap-3 text-muted">
+                            <span>✍️ By @Model.Author</span>
+                            <span>📅 @Model.CreatedAt.ToString("MMMM dd, yyyy")</span>
+                        </div>
+
+                    </header>
+
+                    <hr class="mb-5" />
+
+                    <div class="article-content"
+                         style="white-space: pre-wrap;
+                                overflow-wrap: anywhere;
+                                line-height: 2;
+                                font-size: 1.15rem;
+                                color: #334155;">@Model.Content</div>
+
+                    <footer class="mt-5 pt-4 border-top">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+
+                            <a asp-controller="Articles"
+                               asp-action="Index"
+                               class="btn btn-primary">
+                                ← Explore More Articles
+                            </a>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <div class="d-flex gap-2">
+                                    <a asp-controller="Articles"
+                                       asp-action="Edit"
+                                       asp-route-id="@Model.Id"
+                                       class="btn btn-outline-secondary">
+                                        Edit Article
+                                    </a>
+
+                                    <a asp-controller="Articles"
+                                       asp-action="Delete"
+                                       asp-route-id="@Model.Id"
+                                       class="btn btn-outline-danger">
+                                        Delete
+                                    </a>
+                                </div>
+                            }
+
+                        </div>
+                    </footer>
+
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+</div>

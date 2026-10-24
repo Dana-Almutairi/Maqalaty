@@ -1,0 +1,135 @@
+@model Maqalaty.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="container py-5">
+
+    <div class="row justify-content-center py-lg-5">
+
+        <div class="col-md-8 col-lg-5">
+
+            <div class="text-center mb-4">
+
+                <span class="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
+                    Maqalaty Account
+                </span>
+
+                <h1 class="display-6 fw-bold mb-3">
+                    Welcome Back
+                </h1>
+
+                <p class="text-muted">
+                    Sign in to manage your articles and content.
+                </p>
+
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <form asp-controller="Account"
+                          asp-action="Login"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <!-- Validation Errors -->
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            <div asp-validation-summary="ModelOnly"
+                                 class="alert alert-danger"
+                                 role="alert">
+                            </div>
+                        }
+
+                        <!-- Email -->
+                        <div class="mb-4">
+
+                            <label asp-for="Email"
+                                   class="form-label fw-semibold">
+                                Email Address
+                            </label>
+
+                            <input asp-for="Email"
+                                   type="email"
+                                   class="form-control form-control-lg"
+                                   placeholder="Enter your email"
+                                   autocomplete="username" />
+
+                            <span asp-validation-for="Email"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-4">
+
+                            <label asp-for="Password"
+                                   class="form-label fw-semibold">
+                                Password
+                            </label>
+
+                            <input asp-for="Password"
+                                   type="password"
+                                   class="form-control form-control-lg"
+                                   placeholder="Enter your password"
+                                   autocomplete="current-password" />
+
+                            <span asp-validation-for="Password"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+                        <!-- Remember Me -->
+                        <div class="form-check mb-4">
+
+                            <input asp-for="RememberMe"
+                                   class="form-check-input" />
+
+                            <label asp-for="RememberMe"
+                                   class="form-check-label text-muted">
+                                Remember Me
+                            </label>
+
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit"
+                                class="btn btn-primary btn-lg w-100">
+                            Sign In →
+                        </button>
+
+                    </form>
+
+                    <div class="text-center mt-4">
+
+                        <a asp-controller="Articles"
+                           asp-action="Index"
+                           class="text-decoration-none text-muted small">
+                            ← Back to Articles
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="text-center text-muted small mt-4">
+                Secure access to the Maqalaty platform.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

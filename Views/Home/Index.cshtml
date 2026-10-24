@@ -1,0 +1,213 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<section class="container py-5">
+
+    <div class="row align-items-center justify-content-center py-5">
+
+        <div class="col-lg-9 text-center">
+
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 mb-4">
+                Welcome to Maqalaty
+            </span>
+
+            <h1 class="display-3 fw-bold mb-4">
+                Discover Stories.
+                <br />
+                <span class="text-primary">
+                    Explore New Ideas.
+                </span>
+            </h1>
+
+            <p class="lead text-muted mx-auto mb-4"
+               style="max-width: 650px;">
+                Maqalaty is a modern platform for discovering
+                inspiring articles, meaningful stories,
+                and valuable knowledge.
+            </p>
+
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+
+                <a asp-controller="Articles"
+                   asp-action="Index"
+                   class="btn btn-primary btn-lg px-5 py-3">
+                    Explore Articles →
+                </a>
+
+                <a href="#about"
+                   class="btn btn-outline-secondary btn-lg px-5 py-3">
+                    Learn More
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-5 bg-white">
+
+    <div class="container py-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8 text-center">
+
+                <span class="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
+                    About Our Platform
+                </span>
+
+                <h2 class="display-5 fw-bold mb-4">
+                    What Is Maqalaty?
+                </h2>
+
+                <p class="lead text-muted">
+                    Maqalaty is an article publishing platform
+                    designed to make reading and discovering
+                    knowledge simple, enjoyable, and accessible.
+                </p>
+
+                <p class="text-muted">
+                    Our platform brings together thoughtful writing,
+                    inspiring ideas, and a clean reading experience
+                    in one modern digital space.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Features Section -->
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <span class="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
+            Why Maqalaty?
+        </span>
+
+        <h2 class="display-5 fw-bold">
+            A Better Reading Experience
+        </h2>
+
+        <p class="text-muted">
+            Everything you need to enjoy meaningful content.
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Feature 1 -->
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="card-body p-4 text-center">
+
+                    <div class="display-4 mb-3">
+                        📖
+                    </div>
+
+                    <h4 class="fw-bold mb-3">
+                        Discover Articles
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Explore published articles covering
+                        different ideas, stories, and perspectives.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="card-body p-4 text-center">
+
+                    <div class="display-4 mb-3">
+                        ✨
+                    </div>
+
+                    <h4 class="fw-bold mb-3">
+                        Clean Design
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Enjoy a simple and modern interface
+                        designed for comfortable reading.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="card-body p-4 text-center">
+
+                    <div class="display-4 mb-3">
+                        💡
+                    </div>
+
+                    <h4 class="fw-bold mb-3">
+                        Inspiring Ideas
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Find meaningful content that encourages
+                        curiosity, creativity, and learning.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Call to Action -->
+<section class="bg-white py-5">
+
+    <div class="container py-5 text-center">
+
+        <h2 class="display-5 fw-bold mb-3">
+            Ready to Start Reading?
+        </h2>
+
+        <p class="lead text-muted mb-4">
+            Discover your next favorite article on Maqalaty.
+        </p>
+
+        <a asp-controller="Articles"
+           asp-action="Index"
+           class="btn btn-primary btn-lg px-5 py-3">
+            Browse Articles →
+        </a>
+
+    </div>
+
+</section>

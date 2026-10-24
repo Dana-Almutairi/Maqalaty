@@ -1,0 +1,201 @@
+@model Maqalaty.Models.Article
+
+@{
+    ViewData["Title"] = "Edit Article";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-9">
+
+            <!-- Back Button -->
+            <div class="mb-4">
+                <a asp-controller="Articles"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    ← Back to Articles
+                </a>
+            </div>
+
+            <!-- Page Header -->
+            <div class="mb-4">
+
+                <span class="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
+                    Admin Dashboard
+                </span>
+
+                <h1 class="display-5 fw-bold mb-2">
+                    Edit Article
+                </h1>
+
+                <p class="text-muted">
+                    Update your article, refine your content,
+                    and manage its publication status.
+                </p>
+
+            </div>
+
+            <!-- Edit Form -->
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <form asp-controller="Articles"
+                          asp-action="Edit"
+                          asp-route-id="@Model.Id"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <!-- Article Title -->
+                        <div class="mb-4">
+
+                            <label asp-for="Title"
+                                   class="form-label fw-semibold">
+                                Article Title
+                            </label>
+
+                            <input asp-for="Title"
+                                   class="form-control form-control-lg"
+                                   placeholder="Enter article title"
+                                   maxlength="200" />
+
+                            <span asp-validation-for="Title"
+                                  class="text-danger small"></span>
+
+                        </div>
+
+                        <!-- Author -->
+                        <div class="mb-4">
+
+                            <label asp-for="Author"
+                                   class="form-label fw-semibold">
+                                Author Name
+                            </label>
+
+                            <input asp-for="Author"
+                                   class="form-control"
+                                   placeholder="Enter author name"
+                                   maxlength="100" />
+
+                            <span asp-validation-for="Author"
+                                  class="text-danger small"></span>
+
+                        </div>
+
+                        <!-- Category -->
+                        <div class="mb-4">
+
+                            <label asp-for="CategoryId"
+                                   class="form-label fw-semibold">
+                                Article Category
+                            </label>
+
+                            <select asp-for="CategoryId"
+                                    asp-items="ViewBag.Categories"
+                                    class="form-select form-select-lg">
+
+                                <option value="">
+                                    Select a category
+                                </option>
+
+                            </select>
+
+                            <span asp-validation-for="CategoryId"
+                                  class="text-danger small"></span>
+
+                            <div class="form-text">
+                                Choose the category that best describes your article.
+                            </div>
+
+                        </div>
+
+                        <!-- Article Content -->
+                        <div class="mb-4">
+
+                            <label asp-for="Content"
+                                   class="form-label fw-semibold">
+                                Article Content
+                            </label>
+
+                            <textarea asp-for="Content"
+                                      class="form-control"
+                                      rows="14"
+                                      placeholder="Update your article content..."></textarea>
+
+                            <span asp-validation-for="Content"
+                                  class="text-danger small"></span>
+
+                            <div class="form-text">
+                                Review your content carefully before saving.
+                            </div>
+
+                        </div>
+
+                        <!-- Publication Settings -->
+                        <div class="p-4 rounded-3 mb-4"
+                             style="background-color: #f8fafc; border: 1px solid #e2e8f0;">
+
+                            <h5 class="fw-bold mb-3">
+                                Publication Settings
+                            </h5>
+
+                            <div class="form-check form-switch">
+
+                                <input asp-for="IsPublished"
+                                       class="form-check-input"
+                                       role="switch" />
+
+                                <label asp-for="IsPublished"
+                                       class="form-check-label fw-semibold">
+                                    Publish Article
+                                </label>
+
+                            </div>
+
+                            <p class="text-muted small mt-2 mb-0">
+                                When enabled, the article is visible to readers.
+                                Disable it to save the article as a draft.
+                            </p>
+
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <button type="submit"
+                                    class="btn btn-primary px-4 py-2">
+                                Save Changes
+                            </button>
+
+                            <a asp-controller="Articles"
+                               asp-action="Index"
+                               class="btn btn-outline-secondary px-4 py-2">
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
